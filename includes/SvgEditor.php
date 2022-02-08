@@ -1,10 +1,10 @@
 <?php
 
-class Template {
+class SvgEditor {
 
 	public static function onBeforePageDisplay( $out ) {
 
-		$out->addModules( 'ext.Template' );
+		$out->addModules( 'ext.SvgEditor' );
 
 		return true;
 

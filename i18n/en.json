@@ -2,6 +2,6 @@
 	"@metadata": {
 		"authors": ["Simon Stier"]
 	},
-	"template-editor-desc": "Template for mediawiki extensions",
-	"template-editor-name": "Template"
+	"svg-editor-editor-desc": "SvgEditor for mediawiki extensions",
+	"svg-editor-editor-name": "SvgEditor"
 }

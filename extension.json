@@ -1,40 +1,40 @@
 {
     "manifest_version":2,
-    "name":"Template",
+    "name":"SvgEditor",
     "version":"0.0.1",
     "author":[
         "[https://github.com/simontaurus Simon Stier]"
     ],
-    "url":"https://github.com/simontaurus/Template",
-    "descriptionmsg":"template-desc",
-    "namemsg":"template-name",
+    "url":"https://github.com/simontaurus/mediawiki-extensions-SvgEditor",
+    "descriptionmsg":"svg-editor-desc",
+    "namemsg":"svg-editor-name",
     "license-name":"AGPL-3.0",
     "type":"editor",
     "requires":{
         "MediaWiki":">= 1.31"
     },
     "MessagesDirs":{
-        "Template":[
+        "SvgEditor":[
             "i18n"
         ]
     },
     "ResourceModules":{
-        "ext.Template":{
-            "localBasePath":"modules/ext.Template",
-            "remoteExtPath":"Template/modules/ext.Template",
+        "ext.SvgEditor":{
+            "localBasePath":"modules/ext.SvgEditor",
+            "remoteExtPath":"SvgEditor/modules/ext.SvgEditor",
             "styles":[
-                "Template.css"
+                "SvgEditor.css"
             ],
             "scripts":[
-                "Template.js"
+                "SvgEditor.js"
             ],
             "position":"bottom"
         }
     },
     "AutoloadClasses":{
-        "WellplateEditor":"includes/Template.php"
+        "SvgEditor":"includes/SvgEditor.php"
     },
     "Hooks":{
-        "BeforePageDisplay":"Template::onBeforePageDisplay"
+        "BeforePageDisplay":"SvgEditor::onBeforePageDisplay"
     }
 }

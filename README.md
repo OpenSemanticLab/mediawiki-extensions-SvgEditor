@@ -1,2 +1,2 @@
-# mediawiki-extensions-Template
-Template for mediawiki extensions
+# mediawiki-extensions-SvgEditor
+SvgEditor
