@@ -1,6 +1,8 @@
+/*@nomin*/
 /* 
 DEV: MediaWiki:SvgEdit.js
 REL: modules/ext.SvgEditor/SvgEdit.js
+hint: ResourceLoader minifier does not ES6 yet, therefore skip minification  with "nomin" (see https://phabricator.wikimedia.org/T255556)
 */
 
 $(document).ready(function() {
