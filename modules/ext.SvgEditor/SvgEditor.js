@@ -169,14 +169,18 @@ $(document).ready(function() {
                 api.upload(blob, param).done(function(data) {
                     if (debug) console.log(data.upload.filename + ' has sucessfully uploaded.');
                     file_exists = true;
+		    mw.hook( 'svgeditor.file.uploaded' ).fire({exists: false, name: fileName});
                     mw.notify('Saved', {
                         type: 'success'
                     });
                 }).fail(function(data) {
                     if (debug) console.log(data);
-                    if (data === 'exists') mw.notify('Saved', {
-                        type: 'success'
-                    });
+                    if (data === 'exists') {
+			mw.hook( 'svgeditor.file.uploaded' ).fire({exists: true, name: fileName});
+			mw.notify('Saved', {
+                        	type: 'success'
+                    	});
+		    }
                     else mw.notify('An error occured while saving. \nPlease save your work on the local disk.', {
                         title: 'Error',
                         type: 'error'
