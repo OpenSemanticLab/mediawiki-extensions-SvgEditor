@@ -91,6 +91,7 @@ $(document).ready(function() {
             //$(`#svgedit-iframe-buttons-${uid}`).append(edit_button.$element);
             $(`#svgedit-iframe-buttons-${uid}`).append(save_button.$element);
             $(`#svgedit-iframe-buttons-${uid}`).append(close_button.$element);
+            $(`#svgedit-iframe-buttons-${uid}`).append('<a class="external text" rel="nofollow" target="_blank" href="https://www.youtube.com/watch?v=ZJKmEI06YiY">Tutorial</a>');
 
             //storagePrompt=false does not work here -> must be set on parent window
             const $editor = $(`<iframe class="svgedit" id="svgedit-iframe-${uid}" src="/w/extensions/SvgEditor/dist/editor/index.html?storagePrompt=false" width="100%" height="500px"></iframe>`); //needs build (npm install svgedit)
