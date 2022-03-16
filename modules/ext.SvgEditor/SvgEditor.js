@@ -15,7 +15,7 @@ $(document).ready(function() {
         })
     ).done(function() {
         const debug = false;
-        if (debug) console.log("PaintCanvas init");
+        if (debug) console.log("SvgEditEditor init");
 
         $('.SvgEdit').each(function() {
             $element = $(this);
@@ -46,7 +46,7 @@ $(document).ready(function() {
             </a>`;
             const element_editor_html = ` 
             <div id="svgedit-iframe-box-${uid}" style="display:none;">
-              <div id="svgedit-iframe-buttons-${uid}" class="PaintCanvas-Buttons"></div>
+              <div id="svgedit-iframe-buttons-${uid}" class="SvgEditEditor-Buttons"></div>
               <div id="svgedit-iframe-overlay-${uid}" class="SvgEditEditorOverlay" style="display:none;"></div>
             </div>`;
 
