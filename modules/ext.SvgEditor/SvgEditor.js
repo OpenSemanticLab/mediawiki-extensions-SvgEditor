@@ -145,7 +145,7 @@ $(document).ready(function() {
             });
 
             save_button.on('click', function() {
-                var svg = document.getElementById(`svgedit-iframe-${uid}`).contentWindow.svgEditor.svgCanvas.svgCanvasToString();
+                svg = document.getElementById(`svgedit-iframe-${uid}`).contentWindow.svgEditor.svgCanvas.svgCanvasToString();
                 if (debug) console.log("Save: " + svg);
                 if (debug) console.log("Uploading " + fileName);
                 const blob = new Blob([svg], {
