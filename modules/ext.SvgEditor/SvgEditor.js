@@ -19,8 +19,9 @@ $(document).ready(function() {
 
         $('.SvgEdit').each(function() {
             $element = $(this);
-            const fileName = $element.text().split(';')[0];
-            const fileDisplayName = fileName.replace(".svg", "");
+            const config = $element.data('config') ? $element.data('config') : {};
+            const fileName = config.file_title ? config.file_title : $element.text().split(';')[0];
+            const fileDisplayName = config.file_label ? config.file_label : fileName.replace(".svg", "");
             const filePageName = "File:" + fileName;
             const filePage = "/wiki/" + filePageName;
             const fileUrl = "/wiki/Special:Redirect/file/" + fileName;
@@ -170,14 +171,14 @@ $(document).ready(function() {
                 api.upload(blob, param).done(function(data) {
                     if (debug) console.log(data.upload.filename + ' has sucessfully uploaded.');
                     file_exists = true;
-		    mw.hook( 'svgeditor.file.uploaded' ).fire({exists: false, name: fileName});
+		    mw.hook( 'svgeditor.file.uploaded' ).fire({exists: false, name: fileName, label: fileDisplayName});
                     mw.notify('Saved', {
                         type: 'success'
                     });
                 }).fail(function(data) {
                     if (debug) console.log(data);
                     if (data === 'exists') {
-			mw.hook( 'svgeditor.file.uploaded' ).fire({exists: true, name: fileName});
+			mw.hook( 'svgeditor.file.uploaded' ).fire({exists: true, name: fileName, label: fileDisplayName});
 			mw.notify('Saved', {
                         	type: 'success'
                     	});

@@ -1,11 +1,11 @@
 {
     "manifest_version":2,
     "name":"SvgEditor",
-    "version":"0.0.1",
+    "version":"0.1.0",
     "author":[
         "[https://github.com/simontaurus Simon Stier]"
     ],
-    "url":"https://github.com/simontaurus/mediawiki-extensions-SvgEditor",
+    "url":"https://github.com/OpenSemanticLab/mediawiki-extensions-SvgEditor",
     "descriptionmsg":"svg-editor-desc",
     "namemsg":"svg-editor-name",
     "license-name":"AGPL-3.0",
