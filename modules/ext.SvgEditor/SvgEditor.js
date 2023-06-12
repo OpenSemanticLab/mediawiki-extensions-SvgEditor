@@ -165,7 +165,7 @@ $(document).ready(function() {
                     comment: "Edited with SvgEdit",
                     text: "",
                     format: 'json',
-                    ignorewarnings: 1
+                    ignorewarnings: true
                 };
                 var api = new mw.Api();
                 api.upload(blob, param).done(function(data) {
@@ -175,9 +175,9 @@ $(document).ready(function() {
                     mw.notify('Saved', {
                         type: 'success'
                     });
-                }).fail(function(data) {
+                }).fail(function(retStatus, data) {
                     if (debug) console.log(data);
-                    if (data === 'exists') {
+                    if (data.upload.result === "Success") {
 			mw.hook( 'svgeditor.file.uploaded' ).fire({exists: true, name: fileName, label: fileDisplayName});
 			mw.notify('Saved', {
                         	type: 'success'
