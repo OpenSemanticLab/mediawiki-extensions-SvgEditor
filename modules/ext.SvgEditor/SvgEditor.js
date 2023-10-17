@@ -23,8 +23,8 @@ $(document).ready(function() {
             const fileName = config.file_title ? config.file_title : $element.text().split(';')[0];
             const fileDisplayName = config.file_label ? config.file_label : fileName.replace(".svg", "");
             const filePageName = "File:" + fileName;
-            const filePage = "/wiki/" + filePageName;
-            const fileUrl = "/wiki/Special:Redirect/file/" + fileName;
+            const filePage = mw.util.getUrl(filePageName);
+            const fileUrl = mw.util.getUrl("Special:Redirect/file/" + fileName);
             $element.text("");
             $element.show();
 
@@ -59,7 +59,7 @@ $(document).ready(function() {
             var editor_ready = false;
             var svg = "";
             //test if file exists
-            $.getJSON(`/w/api.php?action=query&prop=revisions&titles=${filePageName}&rvprop=content&formatversion=2&format=json`, function(data) {
+            $.getJSON(mw.config.get("wgScriptPath") + `/api.php?action=query&prop=revisions&titles=${filePageName}&rvprop=content&formatversion=2&format=json`, function(data) {
                 if (data.query.pages[0].hasOwnProperty("missing") && data.query.pages[0].missing === true) {
                     if (debug) console.log("File does not exist");
                     $(`#svgedit-placeholder-${uid}`).show();
@@ -95,7 +95,7 @@ $(document).ready(function() {
             $(`#svgedit-iframe-buttons-${uid}`).append('<a class="external text" rel="nofollow" target="_blank" href="https://www.youtube.com/watch?v=ZJKmEI06YiY">Tutorial</a>');
 
             //storagePrompt=false does not work here -> must be set on parent window
-            const $editor = $(`<iframe class="svgedit" id="svgedit-iframe-${uid}" src="/w/extensions/SvgEditor/dist/editor/index.html?storagePrompt=false" width="100%" height="500px"></iframe>`); //needs build (npm install svgedit)
+            const $editor = $(`<iframe class="svgedit" id="svgedit-iframe-${uid}" src="${mw.config.get("wgScriptPath")}/extensions/SvgEditor/dist/editor/index.html?storagePrompt=false" width="100%" height="500px"></iframe>`); //needs build (npm install svgedit)
 
             $(`#svgedit-edit-link-${uid}`).on('click', function() {
                 //$(`#svgedit-img-${uid}`).remove();
