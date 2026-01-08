@@ -168,29 +168,33 @@ $(document).ready(function () {
                     ignorewarnings: true
                 };
                 var api = new mw.Api();
-                api.upload(blob, param).done(function(data) {
+                api.upload(blob, param).done(function (data) {
                     if (debug) console.log(data.upload.filename + ' has sucessfully uploaded.');
                     file_exists = true;
-		    mw.hook( 'svgeditor.file.uploaded' ).fire({exists: false, name: fileName, label: fileDisplayName});
+                    mw.hook('svgeditor.file.uploaded').fire({ exists: false, name: fileName, label: fileDisplayName });
                     mw.notify('Saved', {
                         type: 'success'
                     });
-                }).fail(function(retStatus, data) {
+                }).fail(function (retStatus, data) {
                     if (debug) console.log(data);
-                    if (data.upload.result === "Success") {
-			mw.hook( 'svgeditor.file.uploaded' ).fire({exists: true, name: fileName, label: fileDisplayName});
-			mw.notify('Saved', {
-                        	type: 'success'
-                    	});
-		    }
-                    else mw.notify('An error occured while saving. \nPlease save your work on the local disk.', {
-                        title: 'Error',
-                        type: 'error'
-                    });
+                    if (data?.upload?.result === "Success") {
+                        mw.hook('svgeditor.file.uploaded').fire({ exists: true, name: fileName, label: fileDisplayName });
+                        mw.notify('Saved', {
+                            type: 'success'
+                        });
+                    }
+                    else {
+                        var info = data?.error?.info;
+                        info = info || "Unknown error";
+                        mw.notify('An error occured while saving: ' + info + '\nPlease save your work on the local disk.', {
+                            title: 'Error',
+                            type: 'error'
+                        });
+                    }
                 });
             });
 
-            close_button.on('click', function() {
+            close_button.on('click', function () {
                 $editor.remove();
                 editor_ready = false;
                 $(`#svgedit-iframe-box-${uid}`).hide();
