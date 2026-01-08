@@ -5,19 +5,19 @@ REL: modules/ext.SvgEditor/SvgEdit.js
 hint: ResourceLoader minifier does not ES6 yet, therefore skip minification  with "nomin" (see https://phabricator.wikimedia.org/T255556)
 */
 
-$(document).ready(function() {
+$(document).ready(function () {
     if ($('.SvgEdit').length === 0) return; //only on pages with a PaintCanvas-div
 
     $.when(
         mw.loader.using('oojs-ui-core'),
-        $.Deferred(function(deferred) {
+        $.Deferred(function (deferred) {
             $(deferred.resolve);
         })
-    ).done(function() {
+    ).done(function () {
         const debug = false;
         if (debug) console.log("SvgEditEditor init");
 
-        $('.SvgEdit').each(function() {
+        $('.SvgEdit').each(function () {
             $element = $(this);
             const config = $element.data('config') ? $element.data('config') : {};
             const fileName = config.file_title ? config.file_title : $element.text().split(';')[0];
@@ -59,7 +59,7 @@ $(document).ready(function() {
             var editor_ready = false;
             var svg = "";
             //test if file exists
-            $.getJSON(mw.config.get("wgScriptPath") + `/api.php?action=query&prop=revisions&titles=${filePageName}&rvprop=content&formatversion=2&format=json`, function(data) {
+            $.getJSON(mw.config.get("wgScriptPath") + `/api.php?action=query&prop=revisions&titles=${filePageName}&rvprop=content&formatversion=2&format=json`, function (data) {
                 if (data.query.pages[0].hasOwnProperty("missing") && data.query.pages[0].missing === true) {
                     if (debug) console.log("File does not exist");
                     $(`#svgedit-placeholder-${uid}`).show();
@@ -68,13 +68,13 @@ $(document).ready(function() {
                     $.ajax({
                         url: fileUrl,
                         dataType: "text",
-                        success: function(data) {
+                        success: function (data) {
                             if (debug) console.log("Load: " + data);
                             svg = data;
                             file_exists = true;
                             $(`#svgedit-img-box-${uid}`).append(element_img_html);
                         },
-                        error: function(data) {
+                        error: function (data) {
                             if (debug) console.log("Error while fetching file: " + data);
                             $(`#svgedit-placeholder-${uid}`).show();
                         }
@@ -97,7 +97,7 @@ $(document).ready(function() {
             //storagePrompt=false does not work here -> must be set on parent window
             const $editor = $(`<iframe class="svgedit" id="svgedit-iframe-${uid}" src="${mw.config.get("wgScriptPath")}/extensions/SvgEditor/dist/editor/index.html?storagePrompt=false" width="100%" height="500px"></iframe>`); //needs build (npm install svgedit)
 
-            $(`#svgedit-edit-link-${uid}`).on('click', function() {
+            $(`#svgedit-edit-link-${uid}`).on('click', function () {
                 //$(`#svgedit-img-${uid}`).remove();
                 $(`#svgedit-img-box-${uid}`).hide();
                 editor_requested = true;
@@ -121,7 +121,7 @@ $(document).ready(function() {
             //});
             //});
 
-            $(document).bind('svgEditorReady', function(data) {
+            $(document).bind('svgEditorReady', function (data) {
                 if (debug) console.log(`svgedit-iframe-${uid} : editor_ready ${editor_ready}, editor_requested ${editor_requested}`);
                 if (editor_ready) {
                     if (debug) console.log("SvgEditor already loaded, source is another instance");
@@ -145,7 +145,7 @@ $(document).ready(function() {
                 }
             });
 
-            save_button.on('click', function() {
+            save_button.on('click', function () {
                 svg = document.getElementById(`svgedit-iframe-${uid}`).contentWindow.svgEditor.svgCanvas.svgCanvasToString();
                 if (debug) console.log("Save: " + svg);
                 if (debug) console.log("Uploading " + fileName);
