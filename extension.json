@@ -8,7 +8,7 @@
     "url":"https://github.com/simontaurus/mediawiki-extensions-SvgEditor",
     "descriptionmsg":"svg-editor-desc",
     "namemsg":"svg-editor-name",
-    "license-name":"AGPL-3.0",
+    "license-name":"Apache-2.0",
     "type":"editor",
     "requires":{
         "MediaWiki":">= 1.31"
